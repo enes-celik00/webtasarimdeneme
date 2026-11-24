@@ -1,0 +1,576 @@
+/* ============================================================
+   TEMEL DEĞİŞKENLER VE SIFIRLAMA (AGENTS.md Kuralları)
+   Zemin: #1A120B | Yazı: #F5EBE0 | Vurgu: #E27B38
+   ============================================================ */
+
+:root {
+  --color-bg: #1A120B;
+  --color-bg-card: #241A11;
+  --color-bg-elevated: #2E2117;
+  --color-text: #F5EBE0;
+  --color-text-muted: #D3C4B6;
+  --color-accent: #E27B38;
+  --color-accent-hover: #F28C49;
+  --color-accent-dim: rgba(226, 123, 56, 0.18);
+  
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  --shadow-cinematic: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(226, 123, 56, 0.08);
+  --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.5);
+  
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================================
+   SABİT ÜST MENÜ
+   ============================================================ */
+
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(26, 18, 11, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(245, 235, 224, 0.08);
+  transition: padding 0.3s ease, background 0.3s ease;
+}
+
+.nav-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-brand {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  color: var(--color-text);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-brand:hover {
+  color: var(--color-accent);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2.2rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding: 0.4rem 0;
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-accent);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ============================================================
+   BÖLÜM YAPISI (100vh SİNEMATİK)
+   ============================================================ */
+
+.section {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 6rem 2rem;
+  background-color: var(--color-bg);
+}
+
+.section-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ============================================================
+   TİPOGRAFİ (BÜYÜK BAŞLIKLAR, AZ YAZI)
+   ============================================================ */
+
+.section-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  color: var(--color-text);
+  margin-bottom: 3.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--color-accent);
+  margin: 1.2rem auto 0;
+  border-radius: 2px;
+}
+
+.sub-badge {
+  display: inline-block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  color: var(--color-accent);
+  background: var(--color-accent-dim);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.2rem;
+  border: 1px solid rgba(226, 123, 56, 0.35);
+}
+
+/* ============================================================
+   1. BÖLÜM: KAPAK (HERO)
+   ============================================================ */
+
+.section-hero {
+  padding-top: 7rem;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.main-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3.2rem, 7.5vw, 6.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  color: var(--color-text);
+  margin-bottom: 1.5rem;
+}
+
+.hero-intro {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  color: var(--color-text-muted);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 540px;
+  margin-bottom: 2.5rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.6rem;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #1A120B;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(226, 123, 56, 0.35);
+}
+
+/* ============================================================
+   SİNEMATİK 3D GÖRSEL ÇERÇEVELERİ
+   ============================================================ */
+
+.cinematic-3d {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-cinematic);
+  border: 1px solid rgba(245, 235, 224, 0.12);
+  transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+  transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s ease;
+}
+
+.cinematic-3d:hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1.02);
+  box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.8), 0 0 50px rgba(226, 123, 56, 0.18);
+}
+
+.section-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.hero-image {
+  aspect-ratio: 1 / 1;
+  max-height: 540px;
+}
+
+/* ============================================================
+   2. BÖLÜM: HAKKIMDA
+   ============================================================ */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 460px 1fr;
+  gap: 4.5rem;
+  align-items: center;
+  width: 100%;
+}
+
+.mascot-image {
+  aspect-ratio: 1 / 1;
+  max-height: 480px;
+}
+
+.about-lead {
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  line-height: 1.75;
+  color: var(--color-text);
+  font-weight: 400;
+  background: var(--color-bg-card);
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(245, 235, 224, 0.1);
+  box-shadow: var(--shadow-card);
+}
+
+/* ============================================================
+   3. BÖLÜM: İLGİ ALANLARIM (3 KART)
+   ============================================================ */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.2rem;
+  width: 100%;
+}
+
+.cinematic-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(245, 235, 224, 0.09);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.cinematic-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(226, 123, 56, 0.4);
+  box-shadow: 0 25px 45px -10px rgba(0, 0, 0, 0.8), 0 0 35px rgba(226, 123, 56, 0.15);
+}
+
+.card-media {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #120C07;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.cinematic-card:hover .card-image {
+  transform: scale(1.06);
+}
+
+.card-content {
+  padding: 1.8rem 1.6rem 2.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-family: var(--font-heading);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.card-desc {
+  font-size: 0.98rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* ============================================================
+   4. BÖLÜM: İLETİŞİM
+   ============================================================ */
+
+.section-contact {
+  text-align: center;
+}
+
+.contact-intro {
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  color: var(--color-text-muted);
+  max-width: 640px;
+  margin: 0 auto 3.5rem;
+  line-height: 1.6;
+}
+
+.contact-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 1.8rem;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto 4.5rem;
+}
+
+.contact-btn {
+  background: var(--color-bg-card);
+  border: 1px solid rgba(245, 235, 224, 0.12);
+  border-radius: var(--radius-md);
+  padding: 1.6rem 1.4rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.contact-btn:hover {
+  transform: translateY(-6px);
+  background: var(--color-bg-elevated);
+  border-color: var(--color-accent);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.6), 0 0 25px rgba(226, 123, 56, 0.15);
+}
+
+.contact-btn-tag {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.5px;
+}
+
+.contact-btn-value {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* ============================================================
+   ALT BİLGİ (FOOTER VE AI NOTU)
+   ============================================================ */
+
+.site-footer {
+  width: 100%;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(245, 235, 224, 0.08);
+}
+
+.ai-notice {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   MOBİL VE TABLET UYUMLULUĞU (RESPONSIVE)
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .hero-text-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-intro {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cinematic-3d {
+    transform: none;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+  }
+  
+  .about-media {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 5rem 1.4rem;
+    min-height: auto;
+    height: auto;
+  }
+  
+  .site-header {
+    padding: 0.5rem 0;
+  }
+  
+  .nav-container {
+    padding: 0.8rem 1.2rem;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .nav-links {
+    gap: 1.2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .nav-link {
+    font-size: 0.85rem;
+  }
+  
+  .section-title {
+    margin-bottom: 2.2rem;
+  }
+  
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  
+  .contact-links-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  
+  .about-lead {
+    padding: 1.8rem 1.4rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* ============================================================
+   ERİŞİLEBİLİRLİK: HAREKETİ AZALTMAYI SEÇEN KULLANICILAR
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .cinematic-3d, .cinematic-card {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .cinematic-3d:hover, .cinematic-card:hover {
+    transform: none !important;
+  }
+  
+  .reveal-elem {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+}
